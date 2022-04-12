@@ -1,0 +1,40 @@
+{% load static %} {% load i18n %}
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+{% include "header.html" %}
+<title>{% block head_title %}{% endblock %}</title>
+{% block extra_head %} {% endblock %}
+
+<body>
+    <link itemprop="thumbnailUrl" href="{% if object %}https://www.htbonmache.com{{object.image.url}}{%else%}https://www.htbonmache.com{% static 'core/img/favicon.png' %}{% endif %}">
+    <span itemprop="image" itemscope itemtype="http://schema.org/ImageObject"> 
+     <link itemprop="url" href="{% if object %}https://www.htbonmache.com{{object.image.url}}{%else%}https://www.htbonmache.com{% static 'core/img/favicon.png' %}{% endif %}">
+     <meta itemprop="width" content="1200">
+     <meta itemprop="height" content="800">
+    </span>
+    {% block noti %}{% endblock %}
+    {% include "nav.html"%}
+    <div style="position: fixed;z-index: 1100;display: block;bottom: 30px;right: 11px;line-height: 40px;width: 40px;background-color: green;text-align: center;border-radius:20px" id="localisation_image">
+        <!-- <a href="#e" data-toggle="modal" data-target="#exampleModalLong" title="Chwazi vil ou vle we anons yo"> 
+            <img src="https://kwenpam.com/ressource/images/v3/systeme/location_30.png" alt="imaj lokalizasyon">
+        </a>  <br> <br> -->
+        <a href="https://wa.me/+13059887282">
+            <i class="icofont icofont-social-whatsapp" alt="contact" style="font-size: 20px; color: white"></i>
+        </a>
+    </div>
+    <div class="mt-2">
+        {% if messages %} {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {% blocktrans %} {{ message }} {% endblocktrans %}
+
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+    </div>
+
+    {% endfor %} {% endif %} {% block content %} {% endblock content %} {% block extra_body %} {% endblock %} {% include "footer.html"%} {% include "script.html"%} {% block extra_scripts %} {% endblock extra_scripts %}
+</body>
+
+</html>
+
